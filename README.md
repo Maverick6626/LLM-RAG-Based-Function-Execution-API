@@ -36,6 +36,14 @@ uvicorn main:app --reload
 #### Execute Function
 
 - **Endpoint:** `POST /execute`
+- **Headers:**
+
+```json
+{
+  "Content-Type": "application/json"
+}
+```
+
 - **Request Body:**
 
 ```json
@@ -74,13 +82,38 @@ uvicorn main:app --reload
 3. **Function Execution**: If `run=true`, the retrieved function executes and returns the results.
 4. **Response**: The API returns the function name and its source code.
 
-## Example Test Run
+## Testing the API
+
+### Using Python Requests
 
 ```python
 import requests
 
 url = "http://127.0.0.1:8000/execute"
+headers = {"Content-Type": "application/json"}
 data = {"session_id": "123", "prompt": "open powershell", "run": True}
-response = requests.post(url, json=data)
+response = requests.post(url, json=data, headers=headers)
 print(response.json())
 ```
+
+### Using Postman
+
+1. Open **Postman**.
+2. Select **POST** request and enter `http://127.0.0.1:8000/execute` as the URL.
+3. Go to the **Headers** tab and add:
+   - Key: `Content-Type`
+   - Value: `application/json`
+4. Go to the **Body** tab and select **raw** -> **JSON**.
+5. Enter the following JSON:
+
+```json
+{
+  "session_id": "12345",
+  "prompt": "open notepad",
+  "run": true
+}
+```
+
+6. Click **Send**.
+7. You should receive a response containing the function name and source code.
+
