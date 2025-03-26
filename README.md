@@ -80,7 +80,7 @@ uvicorn main:app --reload
 import requests
 
 url = "http://127.0.0.1:8000/execute"
-data = {"session_id": "12345", "prompt": "open chrome", "run": true}
+data = {"session_id": "123", "prompt": "open powershell", "run": True}
 response = requests.post(url, json=data)
 print(response.json())
 ```
