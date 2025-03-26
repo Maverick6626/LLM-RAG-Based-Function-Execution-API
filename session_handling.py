@@ -13,6 +13,10 @@ def fetch_session(session_id: str, prompt: str) -> str:
     )
     history = ""
 
+    # No previous session found; return empty history
+    if not results['ids'] or not results['ids'][0]:
+        return history
+    
     # Fetch history with distance <= 0.5
     result_size = len(results['ids'])
     for idx in range(result_size):
